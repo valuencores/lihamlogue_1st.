@@ -1,0 +1,286 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '../styles/tokens.css';
+
+/* ── Base reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: 'Pretendard Variable', 'Inter', system-ui, sans-serif;
+  font-size: var(--type-body);
+  line-height: var(--lh-body);
+  overflow-x: hidden;
+}
+
+/* ── Typography utilities ── */
+.font-mono-label {
+  font-family: 'JetBrains Mono', 'Geist Mono', 'Fira Code', monospace;
+  font-size: var(--type-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.text-display {
+  font-size: var(--type-display);
+  line-height: var(--lh-display);
+  font-weight: 900;
+}
+
+.text-h1 {
+  font-size: var(--type-h1);
+  line-height: var(--lh-h1);
+  font-weight: 800;
+}
+
+.text-h2 {
+  font-size: var(--type-h2);
+  line-height: var(--lh-h2);
+  font-weight: 700;
+}
+
+.text-h3 {
+  font-size: var(--type-h3);
+  line-height: var(--lh-h3);
+  font-weight: 700;
+}
+
+.text-body-l {
+  font-size: var(--type-body-l);
+  line-height: var(--lh-body);
+}
+
+.text-body {
+  font-size: var(--type-body);
+  line-height: var(--lh-body);
+}
+
+.text-caption {
+  font-size: var(--type-caption);
+  line-height: 1.5;
+}
+
+/* ── Glow headline ── */
+.glow-headline {
+  position: relative;
+}
+
+.glow-headline::before {
+  content: '';
+  position: absolute;
+  inset: -60px -40px;
+  background: var(--accent-glow);
+  border-radius: 50%;
+  filter: blur(60px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ── Gradient text ── */
+.text-gradient {
+  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Section spacing ── */
+.section-padding {
+  padding-top: var(--section-gap-desktop);
+  padding-bottom: var(--section-gap-desktop);
+}
+
+@media (max-width: 1024px) {
+  .section-padding {
+    padding-top: var(--section-gap-tablet);
+    padding-bottom: var(--section-gap-tablet);
+  }
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding-top: var(--section-gap-mobile);
+    padding-bottom: var(--section-gap-mobile);
+  }
+}
+
+/* ── Grid container ── */
+.container-grid {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .container-grid {
+    padding: 0 20px;
+  }
+}
+
+/* ── Section divider ── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--border-subtle) 20%, var(--border-subtle) 80%, transparent 100%);
+}
+
+/* ── Noise texture overlay ── */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Faint grid background ── */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(79,140,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79,140,255,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* ── Focus ring ── */
+:focus-visible {
+  outline: 2px solid rgba(79, 140, 255, 0.6);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ── Custom cursor ── */
+.custom-cursor {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s var(--ease-out-cubic), width 0.3s, height 0.3s;
+}
+
+.custom-cursor.hovering {
+  width: 32px;
+  height: 32px;
+}
+
+/* ── Word mask reveal ── */
+.word-mask {
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* ── Button sheen animation ── */
+@keyframes sheen {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+.btn-sheen::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: skewX(-15deg);
+  animation: none;
+}
+
+.btn-sheen:hover::after {
+  animation: sheen 1.2s ease-in-out;
+}
+
+/* ── Orb drift animation ── */
+@keyframes orbDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  25%  { transform: translate(40px, -30px) scale(1.05); }
+  50%  { transform: translate(-20px, 40px) scale(0.97); }
+  75%  { transform: translate(30px, 20px) scale(1.03); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.orb-drift {
+  animation: orbDrift var(--duration-orb) ease-in-out infinite;
+}
+
+/* ── Glow pulse (closing section) ── */
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1.0; }
+}
+
+.glow-pulse {
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+/* ── Progress line fill ── */
+@keyframes fillLine {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* ── Reduced motion fallback ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .orb-drift { animation: none; }
+  .glow-pulse { animation: none; opacity: 1; }
+}
+
+/* ── Scrolled nav ── */
+.nav-scrolled {
+  background: rgba(10, 14, 26, 0.92) !important;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ── Modal backdrop ── */
+.modal-backdrop {
+  background: rgba(10, 14, 26, 0.72);
+  backdrop-filter: blur(12px);
+}
+
+/* ── Horizontal stepper progress line ── */
+.progress-line-glow {
+  box-shadow: 0 0 12px rgba(79, 140, 255, 0.6);
+}

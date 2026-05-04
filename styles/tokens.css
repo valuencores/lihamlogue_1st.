@@ -1,0 +1,86 @@
+/* ─────────────────────────────────────────────
+   SMART P&B — Design Tokens
+   SMART P&B Brand Guide v1.0 / Reehamlog Inc.
+───────────────────────────────────────────── */
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
+:root {
+  /* ── Background ── */
+  --bg-base:      #0A0E1A;
+  --bg-elevated:  #111418;
+  --bg-soft:      #161A23;
+
+  /* ── Border ── */
+  --border-subtle: #1F2430;
+
+  /* ── Text ── */
+  --text-primary:   #F5F7FA;
+  --text-secondary: #A4ADBE;
+  --text-muted:     #6B7280;
+
+  /* ── Accent ── */
+  --accent-blue:   #4F8CFF;
+  --accent-violet: #8B5CF6;
+  --accent-glow:   radial-gradient(ellipse at center, rgba(79,140,255,0.18) 0%, rgba(139,92,246,0.10) 45%, transparent 70%);
+
+  /* ── Radius ── */
+  --radius-sm:   8px;
+  --radius-md:   14px;
+  --radius-lg:   24px;
+  --radius-full: 9999px;
+
+  /* ── Spacing scale ── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+  --space-40: 160px;
+
+  /* ── Section rhythm ── */
+  --section-gap-desktop: 160px;
+  --section-gap-tablet:  120px;
+  --section-gap-mobile:  96px;
+
+  /* ── Type scale (fluid) ── */
+  --type-display: clamp(64px, 9vw, 144px);
+  --type-h1:      clamp(48px, 7vw, 112px);
+  --type-h2:      clamp(36px, 4.5vw, 64px);
+  --type-h3:      clamp(24px, 2.5vw, 32px);
+  --type-body-l:  clamp(18px, 1.2vw, 20px);
+  --type-body:    clamp(16px, 1.05vw, 18px);
+  --type-caption: 13px;
+  --type-mono:    12px;
+
+  /* ── Line heights ── */
+  --lh-display: 1.05;
+  --lh-h1:      1.10;
+  --lh-h2:      1.15;
+  --lh-h3:      1.25;
+  --lh-body:    1.7;
+
+  /* ── Motion ── */
+  --ease-out-cubic: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-micro:   150ms;
+  --duration-sheen:   1200ms;
+  --duration-section: 600ms;
+  --duration-orb:     18s;
+}
+
+/* ── Tailwind media token overrides ── */
+@media (max-width: 768px) {
+  :root {
+    --section-gap-desktop: var(--section-gap-mobile);
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    --section-gap-desktop: var(--section-gap-tablet);
+  }
+}
