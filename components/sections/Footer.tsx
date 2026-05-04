@@ -3,12 +3,6 @@
 import { motion } from 'framer-motion'
 import { sectionEnter, viewportOnce } from '@/lib/motion'
 
-const LINKS = [
-  { label: 'Privacy', href: '/privacy' },
-  { label: 'Terms',   href: '/terms'   },
-  { label: 'Press',   href: '/press'   },
-]
-
 export default function Footer() {
   return (
     <footer
@@ -24,7 +18,7 @@ export default function Footer() {
           viewport={viewportOnce}
           className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
         >
-          {/* Left: wordmark + info */}
+          {/* Left: wordmark + legal */}
           <div>
             <p className="font-bold text-[var(--text-primary)] mb-1" style={{ fontSize: '15px' }}>
               SMART P&amp;B
@@ -45,9 +39,13 @@ export default function Footer() {
           </div>
 
           {/* Right: nav links */}
-          <nav aria-label="Footer links">
-            <ul className="flex items-center gap-6 flex-wrap" role="list">
-              {LINKS.map((link) => (
+          <nav aria-label="Footer navigation">
+            <ul className="flex items-center gap-5 flex-wrap" role="list">
+              {[
+                { label: 'Privacy', href: '/privacy' },
+                { label: 'Terms',   href: '/terms'   },
+                { label: 'Press',   href: '/press'   },
+              ].map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}

@@ -11,7 +11,7 @@ const TILES = [
     cta:      'Join the Waitlist',
     role:     'writer'   as const,
     event:    'cta_waitlist_clicked'  as const,
-    color:    'var(--accent-blue)',
+    color:    'rgba(79,140,255,1)',
     bg:       'rgba(79,140,255,0.06)',
     border:   'rgba(79,140,255,0.22)',
   },
@@ -29,28 +29,28 @@ const TILES = [
     cta:      'Talk to the Team',
     role:     'partner'  as const,
     event:    'cta_partner_clicked'  as const,
-    color:    'var(--accent-violet)',
+    color:    'rgba(139,92,246,1)',
     bg:       'rgba(139,92,246,0.06)',
     border:   'rgba(139,92,246,0.22)',
   },
 ]
 
-interface ClosingCTAProps {
+interface Props {
   onOpenModal: (role: 'writer' | 'investor' | 'partner') => void
 }
 
-export default function ClosingCTA({ onOpenModal }: ClosingCTAProps) {
+export default function ClosingCTA({ onOpenModal }: Props) {
   return (
     <section
       id="cta"
       aria-labelledby="cta-heading"
       className="relative overflow-hidden"
-      style={{ paddingBlock: 'var(--section-gap)' }}
+      style={{ paddingTop: '160px', paddingBottom: '160px' }}
     >
-      {/* Second glow orb — violet-leaning */}
+      {/* Second (and final) glow orb */}
       <GlowOrb
-        className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-75"
         size="lg"
+        className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-75"
       />
 
       <div className="container-grid relative z-10">
@@ -61,16 +61,16 @@ export default function ClosingCTA({ onOpenModal }: ClosingCTAProps) {
           viewport={viewportOnce}
           className="text-center"
         >
-          {/* Display headline */}
-          <motion.div variants={staggerItem} className="relative mb-10 sm:mb-14">
+          {/* Mega headline */}
+          <motion.div variants={staggerItem} className="mb-10 sm:mb-14">
             <h2
               id="cta-heading"
-              className="text-display font-black text-[var(--text-primary)] glow-pulse relative"
+              className="text-display font-black text-[var(--text-primary)] glow-headline relative inline-block"
               lang="ko"
             >
               텍스트는 산업이 됐다.
               <br />
-              <span className="text-gradient">우리는 그 산업의</span>
+              <span className="text-gradient glow-pulse">우리는 그 산업의</span>
               <br />
               운영체제가 된다.
             </h2>
@@ -79,7 +79,7 @@ export default function ClosingCTA({ onOpenModal }: ClosingCTAProps) {
           {/* Sub-line */}
           <motion.p
             variants={staggerItem}
-            className="text-body-l text-[var(--text-secondary)] mb-14 sm:mb-20 max-w-lg mx-auto leading-[1.7]"
+            className="text-body-l text-[var(--text-secondary)] mb-16 sm:mb-20 max-w-md mx-auto leading-[1.7]"
             lang="ko"
           >
             SMART P&amp;B와 함께, 다음 10년의 IP 인프라를 만든다.
@@ -94,7 +94,7 @@ export default function ClosingCTA({ onOpenModal }: ClosingCTAProps) {
               <motion.div
                 key={tile.audience}
                 variants={staggerItem}
-                className="group relative rounded-[20px] p-7 border text-center transition-all duration-200 hover:-translate-y-px cursor-pointer select-none"
+                className="group relative rounded-[24px] p-7 border text-center cursor-pointer transition-all duration-200 hover:-translate-y-1"
                 style={{ background: tile.bg, borderColor: tile.border }}
                 onClick={() => {
                   analytics(tile.event, { location: 'closing_cta' })
@@ -110,19 +110,16 @@ export default function ClosingCTA({ onOpenModal }: ClosingCTAProps) {
                     onOpenModal(tile.role)
                   }
                 }}
-                whileHover={{ scale: 1.015 }}
-                whileTap={{ scale: 0.985 }}
-                transition={{ duration: 0.15 }}
               >
-                {/* Audience label */}
-                <p className="font-mono-label mb-4" style={{ color: tile.color }}>
+                <p
+                  className="font-mono-label mb-4"
+                  style={{ color: tile.color }}
+                >
                   {tile.audience}
                 </p>
-
-                {/* CTA text */}
                 <p
                   className="font-bold text-[var(--text-primary)] transition-colors duration-150 group-hover:text-[var(--accent-blue)]"
-                  style={{ fontSize: 'clamp(14px, 1.3vw, 17px)', lineHeight: 1.35 }}
+                  style={{ fontSize: 'clamp(14px, 1.3vw, 17px)' }}
                 >
                   {tile.cta} →
                 </p>

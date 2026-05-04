@@ -1,98 +1,54 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-// ─────────────────────────────────────────────
-// SMART P&B — Lead capture API
-// Ready for Supabase / Resend / Loops integration
-// ─────────────────────────────────────────────
+type Role = 'writer' | 'investor' | 'partner'
 
 interface LeadPayload {
-  role:    'writer' | 'investor' | 'partner'
-  name:    string
-  email:   string
+  role:     Role
+  name:     string
+  email:    string
   message?: string
 }
 
-// In-memory store (replace with Supabase insert or Resend/Loops API call)
-const leads: Array<LeadPayload & { timestamp: string; id: string }> = []
-
-function validateEmail(email: string): boolean {
+function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
 export async function POST(req: NextRequest) {
   try {
     const body: LeadPayload = await req.json()
+    const { role, name, email, message } = body
 
-    // Validate required fields
-    if (!body.role || !body.name || !body.email) {
-      return NextResponse.json(
-        { error: 'Missing required fields: role, name, email' },
-        { status: 400 }
-      )
-    }
+    // ── Validation ──────────────────────────────
+    const validRoles: Role[] = ['writer', 'investor', 'partner']
+    if (!validRoles.includes(role))     return NextResponse.json({ error: 'Invalid role'  }, { status: 400 })
+    if (!name?.trim())                  return NextResponse.json({ error: 'Name required' }, { status: 400 })
+    if (!email?.trim() || !isValidEmail(email))
+                                        return NextResponse.json({ error: 'Valid email required' }, { status: 400 })
 
-    if (!['writer', 'investor', 'partner'].includes(body.role)) {
-      return NextResponse.json(
-        { error: 'Invalid role. Must be writer, investor, or partner.' },
-        { status: 400 }
-      )
-    }
+    // ── Log submission (dev) ─────────────────────
+    console.log('[lead]', { role, name, email: email.toLowerCase(), message: message?.slice(0, 280) })
 
-    if (!validateEmail(body.email)) {
-      return NextResponse.json(
-        { error: 'Invalid email address.' },
-        { status: 400 }
-      )
-    }
-
-    const lead = {
-      id:        crypto.randomUUID(),
-      role:      body.role,
-      name:      body.name.trim().slice(0, 200),
-      email:     body.email.trim().toLowerCase().slice(0, 320),
-      message:   body.message?.trim().slice(0, 1000) ?? '',
-      timestamp: new Date().toISOString(),
-    }
-
-    // ── Store the lead ─────────────────────────────────
-    // TODO: Replace with real integration, e.g.:
+    // ── TODO: integrate your email / CRM service ─
+    // e.g. Resend, Loops, Supabase insert, etc.
     //
-    //   // Supabase:
-    //   const { error } = await supabase.from('leads').insert(lead)
-    //   if (error) throw error
+    // const resend = new Resend(process.env.RESEND_API_KEY)
+    // await resend.emails.send({
+    //   from:    'SMART P&B <noreply@smartpb.co>',
+    //   to:      email,
+    //   subject: 'We received your request — SMART P&B',
+    //   html:    `<p>Hi ${name}, we'll be in touch within 48 hours.</p>`,
+    // })
     //
-    //   // Resend:
-    //   await resend.emails.send({
-    //     from: 'SMART P&B <noreply@reehamlog.com>',
-    //     to:   ['contact@reehamlog.com'],
-    //     subject: `New ${lead.role} lead: ${lead.name}`,
-    //     text: JSON.stringify(lead, null, 2),
-    //   })
-    //
-    //   // Loops:
-    //   await loops.sendTransactionalEmail({ transactionalId: '...', email: lead.email, ... })
-    //
-    leads.push(lead)
+    // await supabase.from('leads').insert({ role, name, email, message })
 
-    console.log('[lead]', JSON.stringify(lead))
+    return NextResponse.json({ ok: true }, { status: 200 })
 
-    return NextResponse.json(
-      { success: true, message: "We'll reach out within 48 hours." },
-      { status: 200 }
-    )
-  } catch (err) {
-    console.error('[lead API error]', err)
-    return NextResponse.json(
-      { error: 'Internal server error.' },
-      { status: 500 }
-    )
+  } catch {
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
 
-// GET endpoint for debug/admin use (protect in production)
+// Reject non-POST methods
 export async function GET() {
-  if (process.env.NODE_ENV !== 'development') {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-  }
-  return NextResponse.json({ count: leads.length, leads })
+  return NextResponse.json({ error: 'Method not allowed' }, { status: 405 })
 }

@@ -7,11 +7,11 @@ import Button from './ui/Button'
 import { analytics } from '@/lib/analytics'
 
 const NAV_LINKS = [
-  { label: 'Manifesto', href: '#manifesto' },
-  { label: 'Product',   href: '#os'        },
-  { label: 'Market',    href: '#market'    },
-  { label: 'Roadmap',   href: '#roadmap'   },
-  { label: 'Company',   href: '#company'   },
+  { label: 'Vision',   href: '#manifesto' },
+  { label: 'Product',  href: '#os'        },
+  { label: 'Market',   href: '#market'    },
+  { label: 'Roadmap',  href: '#roadmap'   },
+  { label: 'Company',  href: '#company'   },
 ]
 
 interface NavProps {
@@ -23,17 +23,22 @@ export default function Nav({ onWaitlistClick }: NavProps) {
   const [mobileOpen,  setMobileOpen]  = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 48)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    const handle = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', handle, { passive: true })
+    return () => window.removeEventListener('scroll', handle)
   }, [])
 
-  // Close mobile menu on hash change
   useEffect(() => {
     const close = () => setMobileOpen(false)
     window.addEventListener('hashchange', close)
     return () => window.removeEventListener('hashchange', close)
   }, [])
+
+  // Lock body scroll when mobile menu open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [mobileOpen])
 
   const handleWaitlist = () => {
     analytics('nav_waitlist_clicked')
@@ -47,32 +52,33 @@ export default function Nav({ onWaitlistClick }: NavProps) {
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           scrolled ? 'nav-scrolled' : 'bg-transparent'
         }`}
-        initial={{ y: -16, opacity: 0 }}
-        animate={{ y: 0,   opacity: 1 }}
-        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0,  opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         role="banner"
       >
         <nav
-          className="container-grid flex items-center justify-between h-[64px]"
+          className="container-grid flex items-center justify-between h-16"
           aria-label="Main navigation"
         >
           {/* Wordmark */}
           <a
             href="#hero"
-            className="font-bold tracking-tight text-[var(--text-primary)] text-[16px] sm:text-[17px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent-blue)] rounded-sm"
-            aria-label="SMART P&B – home"
+            className="font-bold text-[var(--text-primary)] tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent-blue)] rounded-sm"
+            style={{ fontSize: '17px' }}
+            aria-label="SMART P&B — home"
           >
             SMART P&amp;B
           </a>
 
           {/* Desktop links */}
-          <ul className="hidden lg:flex items-center gap-7" role="list">
-            {NAV_LINKS.map(link => (
+          <ul className="hidden lg:flex items-center gap-8" role="list">
+            {NAV_LINKS.map((link) => (
               <li key={link.label}>
                 <a
                   href={link.href}
                   className="font-mono-label text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent-blue)] rounded-sm py-1"
-                  style={{ fontSize: '11px' }}
+                  style={{ fontSize: '11px', letterSpacing: '0.1em' }}
                 >
                   {link.label}
                 </a>
@@ -82,13 +88,7 @@ export default function Nav({ onWaitlistClick }: NavProps) {
 
           {/* Desktop CTA */}
           <div className="hidden lg:block">
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={handleWaitlist}
-              arrow
-              aria-label="Join the waitlist"
-            >
+            <Button variant="primary" size="sm" onClick={handleWaitlist} arrow>
               Join Waitlist
             </Button>
           </div>
@@ -96,10 +96,10 @@ export default function Nav({ onWaitlistClick }: NavProps) {
           {/* Mobile hamburger */}
           <button
             className="lg:hidden p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent-blue)] rounded-sm"
-            onClick={() => setMobileOpen(o => !o)}
-            aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
-            aria-controls="mobile-nav"
+            aria-controls="mobile-menu"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -110,27 +110,28 @@ export default function Nav({ onWaitlistClick }: NavProps) {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            id="mobile-nav"
-            className="fixed inset-0 z-30 pt-16"
+            id="mobile-menu"
+            className="fixed inset-0 z-30 flex flex-col pt-16"
             style={{ background: 'rgba(10,14,26,0.97)', backdropFilter: 'blur(16px)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}
+            transition={{ duration: 0.2 }}
             role="dialog"
-            aria-label="Mobile navigation menu"
+            aria-label="Mobile navigation"
             aria-modal="true"
           >
-            <nav className="container-grid flex flex-col gap-5 pt-14">
+            <nav className="container-grid flex flex-col gap-5 pt-10">
               {NAV_LINKS.map((link, i) => (
                 <motion.a
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="text-[26px] font-bold text-[var(--text-primary)] hover:text-[var(--accent-blue)] transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent-blue)] rounded-sm"
-                  initial={{ opacity: 0, x: -14 }}
+                  className="font-bold text-[var(--text-primary)] hover:text-[var(--accent-blue)] transition-colors duration-150"
+                  style={{ fontSize: '28px', letterSpacing: '-0.01em' }}
+                  initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.045 + 0.05, duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: i * 0.05 + 0.08, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 >
                   {link.label}
                 </motion.a>
@@ -140,7 +141,7 @@ export default function Nav({ onWaitlistClick }: NavProps) {
                 className="pt-6"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.32 }}
+                transition={{ delay: 0.38 }}
               >
                 <Button variant="primary" size="lg" onClick={handleWaitlist} arrow>
                   Join the Waitlist
