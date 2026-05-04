@@ -9,49 +9,41 @@ const MARKETS = [
     id: 'M1',
     label: 'Publishing',
     sub: 'IP-lifecycle shift',
-    color: 'rgba(79,140,255,0.15)',
-    border: 'rgba(79,140,255,0.3)',
-    accent: 'var(--accent-blue)',
+    color: 'var(--accent-blue)',
+    bg: 'rgba(79,140,255,0.07)',
+    border: 'rgba(79,140,255,0.22)',
     stat: 'OSMU',
     statDesc: '산업 표준화',
-    x: '0%',
-    y: '0%',
   },
   {
     id: 'M2',
     label: 'Audiobook',
     sub: 'fastest-growing format',
-    color: 'rgba(139,92,246,0.15)',
-    border: 'rgba(139,92,246,0.3)',
-    accent: 'var(--accent-violet)',
+    color: 'var(--accent-violet)',
+    bg: 'rgba(139,92,246,0.07)',
+    border: 'rgba(139,92,246,0.22)',
     stat: '두 자릿수',
     statDesc: 'YoY 성장률',
-    x: '50%',
-    y: '0%',
   },
   {
     id: 'M3',
-    label: 'Webtoon · Web Novel IP',
-    sub: 'proven cost & time efficiency',
-    color: 'rgba(79,140,255,0.12)',
-    border: 'rgba(79,140,255,0.25)',
-    accent: 'var(--accent-blue)',
+    label: 'Webtoon · Web Novel',
+    sub: 'proven IP efficiency',
+    color: 'var(--accent-blue)',
+    bg: 'rgba(79,140,255,0.07)',
+    border: 'rgba(79,140,255,0.22)',
     stat: '검증된',
     statDesc: '비용·속도 효율',
-    x: '0%',
-    y: '50%',
   },
   {
     id: 'M4',
     label: 'Creator Economy',
     sub: 'operating-tool gap',
-    color: 'rgba(139,92,246,0.12)',
-    border: 'rgba(139,92,246,0.25)',
-    accent: 'var(--accent-violet)',
+    color: 'var(--accent-violet)',
+    bg: 'rgba(139,92,246,0.07)',
+    border: 'rgba(139,92,246,0.22)',
     stat: '도구의 공백',
     statDesc: '다음 시장의 문',
-    x: '50%',
-    y: '50%',
   },
 ]
 
@@ -71,7 +63,7 @@ export default function Market() {
           viewport={viewportOnce}
         >
           {/* Label */}
-          <motion.div variants={staggerItem} className="mb-12 sm:mb-16">
+          <motion.div variants={staggerItem} className="mb-14">
             <SectionLabel animate={false}>05 — MARKET</SectionLabel>
           </motion.div>
 
@@ -79,73 +71,71 @@ export default function Market() {
           <motion.h2
             id="market-heading"
             variants={staggerItem}
-            className="text-h2 font-bold text-[var(--text-primary)] mb-16 sm:mb-20 max-w-3xl"
+            className="text-h2 text-[var(--text-primary)] max-w-3xl mb-16 sm:mb-20"
             lang="ko"
           >
             우리는 출판 시장이 아니라,{' '}
             <span className="text-gradient">4개 시장의 교차점</span>에 있다.
           </motion.h2>
 
-          {/* Venn-like visual grid */}
+          {/* 2×2 Venn-style grid */}
           <motion.div
             variants={staggerContainer}
             className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-20 sm:mb-24 relative"
           >
-            {/* Center intersection label */}
+            {/* Center intersection badge (desktop) */}
             <div
-              className="hidden sm:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex-col items-center justify-center text-center rounded-full"
+              className="hidden sm:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex-col items-center justify-center rounded-full"
               style={{
-                width: '120px',
-                height: '120px',
-                background: 'radial-gradient(ellipse at center, rgba(79,140,255,0.25) 0%, rgba(139,92,246,0.18) 60%, transparent 100%)',
-                border: '1px solid rgba(79,140,255,0.3)',
+                width: '108px',
+                height: '108px',
+                background: 'radial-gradient(ellipse, rgba(79,140,255,0.2) 0%, rgba(139,92,246,0.15) 55%, transparent 100%)',
+                border: '1px solid rgba(79,140,255,0.28)',
                 backdropFilter: 'blur(8px)',
               }}
               aria-hidden="true"
             >
-              <span className="font-bold text-[var(--text-primary)] text-[11px] leading-tight">
+              <span
+                className="font-bold text-[var(--text-primary)] text-center leading-tight"
+                style={{ fontSize: '11px' }}
+              >
                 SMART<br />P&amp;B
               </span>
             </div>
 
-            {MARKETS.map((market) => (
+            {MARKETS.map((m) => (
               <motion.article
-                key={market.id}
+                key={m.id}
                 variants={staggerItem}
-                className="relative rounded-[24px] p-8 border transition-all duration-200 hover:border-opacity-60 hover:-translate-y-px"
-                style={{
-                  background: market.color,
-                  borderColor: market.border,
-                }}
-                aria-label={`${market.label}: ${market.sub}`}
+                className="relative rounded-[24px] p-8 border transition-all duration-200 hover:-translate-y-px"
+                style={{ background: m.bg, borderColor: m.border }}
+                aria-label={`${m.label}: ${m.sub}`}
               >
-                {/* Market label */}
                 <h3
-                  className="font-bold text-[var(--text-primary)] mb-2"
+                  className="font-bold text-[var(--text-primary)] mb-2 leading-[1.2]"
                   style={{ fontSize: 'clamp(16px, 1.5vw, 20px)' }}
                 >
-                  {market.label}
+                  {m.label}
                 </h3>
 
-                {/* Sub-label */}
-                <p
-                  className="font-mono-label mb-6"
-                  style={{ color: market.accent }}
-                >
-                  {market.sub}
+                <p className="font-mono-label mb-7" style={{ color: m.color }}>
+                  {m.sub}
                 </p>
 
-                {/* Stat */}
                 <div className="flex items-end gap-2">
                   <span
-                    className="font-black"
-                    style={{ fontSize: 'clamp(22px, 2vw, 30px)', color: market.accent, lineHeight: 1 }}
+                    className="font-black leading-none"
+                    style={{ fontSize: 'clamp(20px, 2vw, 28px)', color: m.color }}
                     lang="ko"
                   >
-                    {market.stat}
+                    {m.stat}
                   </span>
-                  <span className="text-[var(--text-muted)] text-[13px] pb-0.5" lang="ko">
-                    {market.statDesc}
+                  <span
+                    className="text-[var(--text-muted)] pb-0.5"
+                    style={{ fontSize: '13px' }}
+                    lang="ko"
+                  >
+                    {m.statDesc}
                   </span>
                 </div>
               </motion.article>
@@ -153,18 +143,10 @@ export default function Market() {
           </motion.div>
 
           {/* Punchline */}
-          <motion.div variants={staggerItem} className="relative">
-            <div
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background: 'radial-gradient(ellipse at left, rgba(79,140,255,0.08) 0%, transparent 60%)',
-                filter: 'blur(40px)',
-              }}
-              aria-hidden="true"
-            />
+          <motion.div variants={staggerItem}>
             <blockquote
-              className="relative font-bold text-[var(--text-primary)] max-w-2xl"
-              style={{ fontSize: 'clamp(18px, 2vw, 26px)', lineHeight: '1.4' }}
+              className="font-bold text-[var(--text-primary)] max-w-2xl"
+              style={{ fontSize: 'clamp(20px, 2.4vw, 32px)', lineHeight: 1.35, letterSpacing: '-0.015em' }}
               lang="ko"
             >
               &ldquo;4개 시장이 만나는 단 하나의 빈자리에,{' '}

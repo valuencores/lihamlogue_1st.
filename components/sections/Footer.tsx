@@ -3,9 +3,13 @@
 import { motion } from 'framer-motion'
 import { sectionEnter, viewportOnce } from '@/lib/motion'
 
-export default function Footer() {
-  const year = 2026
+const LINKS = [
+  { label: 'Privacy', href: '/privacy' },
+  { label: 'Terms',   href: '/terms'   },
+  { label: 'Press',   href: '/press'   },
+]
 
+export default function Footer() {
   return (
     <footer
       className="relative border-t border-[var(--border-subtle)]"
@@ -20,9 +24,9 @@ export default function Footer() {
           viewport={viewportOnce}
           className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6"
         >
-          {/* Left: wordmark + company info */}
+          {/* Left: wordmark + info */}
           <div>
-            <p className="font-bold text-[var(--text-primary)] text-[15px] mb-1">
+            <p className="font-bold text-[var(--text-primary)] mb-1" style={{ fontSize: '15px' }}>
               SMART P&amp;B
             </p>
             <p className="text-caption text-[var(--text-muted)]">
@@ -36,18 +40,14 @@ export default function Footer() {
               &nbsp;·&nbsp;Seoul, KR
             </p>
             <p className="text-caption text-[var(--text-muted)] mt-1">
-              © {year} Reehamlog Inc. All rights reserved.
+              © 2026 Reehamlog Inc. All rights reserved.
             </p>
           </div>
 
-          {/* Right: small links */}
+          {/* Right: nav links */}
           <nav aria-label="Footer links">
-            <ul className="flex items-center gap-5 flex-wrap" role="list">
-              {[
-                { label: 'Privacy', href: '/privacy' },
-                { label: 'Terms',   href: '/terms' },
-                { label: 'Press',   href: '/press' },
-              ].map((link) => (
+            <ul className="flex items-center gap-6 flex-wrap" role="list">
+              {LINKS.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}

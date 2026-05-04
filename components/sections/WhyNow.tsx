@@ -7,17 +7,17 @@ import SectionLabel from '@/components/ui/SectionLabel'
 const TRENDS = [
   {
     number: '01',
-    title: 'Publishing → IP industry shift',
+    title: 'Publishing → IP Lifecycle',
     body: '출판은 종이책 제조에서 IP 생애주기 운영으로 재편 중. OSMU가 산업 표준이 됐다.',
   },
   {
     number: '02',
-    title: 'AI speed, human trust',
-    body: '대중의 AI 신뢰는 여전히 낮다. 시장은 자동 생성이 아닌 AI+Human 검증 구조를 요구한다.',
+    title: 'AI Speed + Human Trust',
+    body: '대중의 AI 신뢰는 여전히 낮다. 시장은 자동 생성이 아닌 AI＋Human 검증 구조를 요구한다.',
   },
   {
     number: '03',
-    title: 'Creator economy needs operating tools',
+    title: 'Creator Economy Tool Gap',
     body: '크리에이터 시장은 측정·표준·운영 도구의 빈자리에서 멈춰 있다. 도구를 쥔 자가 다음 시장을 가져간다.',
   },
 ]
@@ -38,7 +38,7 @@ export default function WhyNow() {
           viewport={viewportOnce}
         >
           {/* Label */}
-          <motion.div variants={staggerItem} className="mb-12 sm:mb-16">
+          <motion.div variants={staggerItem} className="mb-14">
             <SectionLabel animate={false}>02 — WHY NOW</SectionLabel>
           </motion.div>
 
@@ -46,66 +46,74 @@ export default function WhyNow() {
           <motion.h2
             id="whynow-heading"
             variants={staggerItem}
-            className="text-h2 font-bold text-[var(--text-primary)] mb-16 sm:mb-20 max-w-2xl"
+            className="text-h2 text-[var(--text-primary)] max-w-2xl mb-16 sm:mb-20"
             lang="ko"
           >
-            3가지 흐름이 동시에 같은 방향을 가리킨다.
+            3가지 흐름이 동시에{' '}
+            <span className="text-[var(--text-secondary)] font-normal">같은 방향을 가리킨다.</span>
           </motion.h2>
 
-          {/* 3 columns */}
+          {/* 3-column grid */}
           <motion.div
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-px border border-[var(--border-subtle)] rounded-[24px] overflow-hidden mb-20 sm:mb-28"
+            className="grid grid-cols-1 md:grid-cols-3 mb-20 sm:mb-28"
+            style={{ border: '1px solid var(--border-subtle)', borderRadius: '24px', overflow: 'hidden' }}
           >
-            {TRENDS.map((trend, idx) => (
+            {TRENDS.map((t, idx) => (
               <motion.div
-                key={trend.number}
+                key={t.number}
                 variants={staggerItem}
-                className="relative p-8 sm:p-10 bg-[var(--bg-elevated)]"
+                className="relative p-8 sm:p-10"
+                style={{ background: 'var(--bg-elevated)' }}
               >
-                {/* Vertical divider between columns */}
+                {/* Vertical divider */}
                 {idx < TRENDS.length - 1 && (
                   <div
-                    className="hidden md:block absolute right-0 top-8 bottom-8 w-px bg-[var(--border-subtle)]"
+                    className="hidden md:block absolute right-0 top-8 bottom-8 w-px"
+                    style={{ background: 'var(--border-subtle)' }}
+                    aria-hidden="true"
+                  />
+                )}
+                {/* Horizontal divider on mobile */}
+                {idx < TRENDS.length - 1 && (
+                  <div
+                    className="md:hidden absolute bottom-0 left-8 right-8 h-px"
+                    style={{ background: 'var(--border-subtle)' }}
                     aria-hidden="true"
                   />
                 )}
 
-                {/* Number annotation */}
                 <span className="font-mono-label block mb-6 text-[var(--accent-blue)]">
-                  {trend.number}
+                  {t.number}
                 </span>
 
-                {/* English category label */}
                 <h3
-                  className="font-bold text-[var(--text-primary)] mb-4"
-                  style={{ fontSize: 'clamp(16px, 1.4vw, 20px)', lineHeight: '1.3' }}
+                  className="font-bold text-[var(--text-primary)] mb-4 leading-[1.25]"
+                  style={{ fontSize: 'clamp(15px, 1.4vw, 19px)' }}
                 >
-                  {trend.title}
+                  {t.title}
                 </h3>
 
-                {/* Korean body */}
                 <p
-                  className="text-body text-[var(--text-secondary)]"
+                  className="text-[var(--text-secondary)] leading-[1.75]"
+                  style={{ fontSize: 'clamp(14px, 1vw, 16px)' }}
                   lang="ko"
                 >
-                  {trend.body}
+                  {t.body}
                 </p>
               </motion.div>
             ))}
           </motion.div>
 
           {/* Punchline */}
-          <motion.div variants={staggerItem} className="max-w-2xl">
+          <motion.div variants={staggerItem}>
             <blockquote
-              className="font-bold text-[var(--text-primary)]"
-              style={{ fontSize: 'clamp(20px, 2.2vw, 30px)', lineHeight: '1.4' }}
+              className="font-bold text-[var(--text-primary)] max-w-2xl"
+              style={{ fontSize: 'clamp(20px, 2.4vw, 32px)', lineHeight: 1.35, letterSpacing: '-0.015em' }}
               lang="ko"
             >
               &ldquo;기술과 시장과 창작자의 니즈가 동시에 만나는,{' '}
-              <span className="text-[var(--text-secondary)] font-normal">
-                단 한 번의 타이밍.
-              </span>
+              <span className="text-[var(--text-secondary)] font-normal">단 한 번의 타이밍.</span>
               &rdquo;
             </blockquote>
           </motion.div>

@@ -37,7 +37,7 @@ export default function Problem() {
           viewport={viewportOnce}
         >
           {/* Label */}
-          <motion.div variants={staggerItem} className="mb-12 sm:mb-16">
+          <motion.div variants={staggerItem} className="mb-14">
             <SectionLabel animate={false}>01 — THE PROBLEM</SectionLabel>
           </motion.div>
 
@@ -45,82 +45,78 @@ export default function Problem() {
           <motion.h2
             id="problem-heading"
             variants={staggerItem}
-            className="text-h2 font-bold text-[var(--text-primary)] mb-16 sm:mb-20 max-w-3xl"
+            className="text-h2 text-[var(--text-primary)] max-w-3xl mb-16 sm:mb-20"
             lang="ko"
           >
             출판은 이미 IP 산업으로 바뀌었지만,{' '}
-            <span className="text-[var(--text-secondary)]">
+            <span className="text-[var(--text-secondary)] font-normal">
               창작자에겐 그 전환을 감당할 시스템이 없다.
             </span>
           </motion.h2>
 
-          {/* Problem cards */}
+          {/* Problem cards — 3-col grid */}
           <motion.div
             variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-20 sm:mb-28"
+            className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border-subtle)] rounded-[24px] overflow-hidden mb-20 sm:mb-28"
           >
             {PROBLEMS.map((p) => (
               <motion.article
                 key={p.number}
                 variants={staggerItem}
-                className="group relative rounded-[24px] p-8 border border-[var(--border-subtle)] bg-[var(--bg-elevated)] transition-all duration-200 hover:border-[rgba(79,140,255,0.24)] hover:-translate-y-px"
-                style={{ cursor: 'default' }}
+                className="group relative flex flex-col gap-5 p-8 sm:p-10 bg-[var(--bg-elevated)] transition-colors duration-200 hover:bg-[#13171f]"
                 aria-label={p.title}
               >
                 {/* Number */}
-                <span
-                  className="font-mono-label block mb-6 text-[var(--accent-blue)]"
-                  aria-hidden="true"
-                >
+                <span className="font-mono-label text-[var(--accent-blue)]">
                   {p.number}
                 </span>
 
                 {/* Title */}
                 <h3
-                  className="text-h3 font-bold text-[var(--text-primary)] mb-4 leading-[1.3]"
+                  className="font-bold text-[var(--text-primary)] leading-[1.3]"
+                  style={{ fontSize: 'clamp(17px, 1.6vw, 22px)' }}
                   lang="ko"
-                  style={{ fontSize: 'clamp(18px, 1.8vw, 24px)' }}
                 >
                   {p.title}
                 </h3>
 
                 {/* Body */}
                 <p
-                  className="text-body text-[var(--text-secondary)] leading-[1.7]"
+                  className="text-[var(--text-secondary)] leading-[1.75]"
+                  style={{ fontSize: 'clamp(14px, 1vw, 16px)' }}
                   lang="ko"
                 >
                   {p.body}
                 </p>
 
-                {/* Hover accent line */}
+                {/* Bottom accent — slides in on hover */}
                 <div
-                  className="absolute bottom-0 left-8 right-8 h-px bg-[var(--accent-blue)] opacity-0 group-hover:opacity-30 transition-opacity duration-300 rounded-full"
+                  className="absolute bottom-0 left-0 right-0 h-px bg-[var(--accent-blue)] opacity-0 group-hover:opacity-20 transition-opacity duration-300"
                   aria-hidden="true"
                 />
               </motion.article>
             ))}
           </motion.div>
 
-          {/* Punchline */}
-          <motion.div
-            variants={staggerItem}
-            className="relative text-center"
-          >
-            {/* Glow behind punchline */}
+          {/* Punchline quote */}
+          <motion.div variants={staggerItem} className="relative">
             <div
               className="absolute inset-0 pointer-events-none"
               style={{
-                background: 'radial-gradient(ellipse at center, rgba(79,140,255,0.10) 0%, transparent 65%)',
-                filter: 'blur(40px)',
+                background: 'radial-gradient(ellipse at center, rgba(79,140,255,0.09) 0%, transparent 70%)',
+                filter: 'blur(48px)',
               }}
               aria-hidden="true"
             />
             <blockquote
-              className="relative font-bold text-[var(--text-primary)] leading-[1.2]"
-              style={{ fontSize: 'clamp(24px, 3vw, 44px)' }}
+              className="relative font-bold text-[var(--text-primary)] max-w-2xl"
+              style={{ fontSize: 'clamp(22px, 2.8vw, 40px)', lineHeight: 1.2, letterSpacing: '-0.015em' }}
               lang="ko"
             >
-              &ldquo;텍스트는 산업이 됐는데, 작가는 여전히 혼자다.&rdquo;
+              &ldquo;텍스트는 산업이 됐는데,
+              <br />
+              <span className="text-[var(--text-secondary)] font-normal">작가는 여전히 혼자다.</span>
+              &rdquo;
             </blockquote>
           </motion.div>
         </motion.div>
