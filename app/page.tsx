@@ -22,8 +22,9 @@ import Footer        from '@/components/sections/Footer'
 import Modal    from '@/components/ui/Modal'
 import LeadForm from '@/components/ui/LeadForm'
 
-// Custom cursor (client-only, no SSR)
+// Client-only components (no SSR)
 const CustomCursor = dynamic(() => import('@/components/ui/CustomCursor'), { ssr: false })
+const ScrollNav    = dynamic(() => import('@/components/ui/ScrollNav'),    { ssr: false })
 
 type ModalRole = 'writer' | 'investor' | 'partner'
 
@@ -100,6 +101,9 @@ export default function Home() {
       </main>
 
       <Footer />
+
+      {/* Fixed scroll navigation */}
+      <ScrollNav />
 
       <Modal
         isOpen={modalOpen}
