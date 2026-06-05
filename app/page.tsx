@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 
+const CustomCursor = dynamic(() => import('@/components/ui/CustomCursor'), { ssr: false })
 const Nav      = dynamic(() => import('@/components/sections/v2/Nav'),      { ssr: false })
 const Hero     = dynamic(() => import('@/components/sections/v2/Hero'),     { ssr: false })
 const Reality  = dynamic(() => import('@/components/sections/v2/Reality'),  { ssr: false })
@@ -14,16 +15,19 @@ const Footer   = dynamic(() => import('@/components/sections/v2/Footer'),   { ss
 
 export default function Home() {
   return (
-    <main style={{ background: 'var(--bg-base)', minHeight: '100vh' }}>
-      <Nav />
-      <Hero />
-      <Reality />
-      <Problem />
-      <WhyNow />
-      <Platform />
-      <IP />
-      <Waitlist />
-      <Footer />
-    </main>
+    <>
+      <CustomCursor />
+      <main style={{ background: 'var(--bg-base)', minHeight: '100vh' }}>
+        <Nav />
+        <Hero />
+        <Reality />
+        <Problem />
+        <WhyNow />
+        <Platform />
+        <IP />
+        <Waitlist />
+        <Footer />
+      </main>
+    </>
   )
 }
