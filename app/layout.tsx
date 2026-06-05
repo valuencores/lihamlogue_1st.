@@ -23,21 +23,21 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://smartpb.co'),
+  metadataBase: new URL('https://lihamlogue.com'),
   title: 'SMART P&B — An Operating System for Text IP',
   description:
     'AI와 인간이 함께 텍스트를 신뢰 가능한 IP로 전환하는 운영체제. Turn one manuscript into one industry-grade IP.',
   keywords: [
     'AI publishing', 'text IP', 'operating system', 'Korean startup',
-    'Reehamlog', 'SMART P&B', '출판', 'IP', '작가', '전자책', '오디오북',
+    'Liham Logue', 'SMART P&B', '출판', 'IP', '작가', '전자책', '오디오북',
   ],
-  authors: [{ name: 'Reehamlog Inc.' }],
-  creator: 'Reehamlog Inc.',
+  authors: [{ name: 'Liham Logue Inc.' }],
+  creator: 'Liham Logue Inc.',
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
     alternateLocale: 'en_US',
-    url: 'https://smartpb.co',
+    url: 'https://lihamlogue.com',
     siteName: 'SMART P&B',
     title: 'SMART P&B — An Operating System for Text IP',
     description:

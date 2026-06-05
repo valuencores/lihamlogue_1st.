@@ -108,7 +108,7 @@ export default function Team() {
             <div className="grid sm:grid-cols-2 gap-8">
               <div>
                 <h3 className="font-black text-[var(--text-primary)] mb-1" style={{ fontSize: '22px' }}>
-                  Reehamlog Inc.
+                  Liham Logue Inc.
                 </h3>
                 <p className="text-[var(--text-secondary)]" style={{ fontSize: '15px' }} lang="ko">
                   리함로그 주식회사
@@ -119,7 +119,7 @@ export default function Team() {
                 {[
                   { key: 'Founded', value: '2026' },
                   { key: 'HQ',      value: 'Seoul, Republic of Korea' },
-                  { key: 'Contact', value: 'contact@reehamlog.com', isEmail: true },
+                  { key: 'Contact', value: 'contact@lihamlogue.com', isEmail: true },
                 ].map(({ key, value, isEmail }) => (
                   <div key={key} className="flex items-baseline gap-3">
                     <dt

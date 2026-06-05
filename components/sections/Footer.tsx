@@ -24,17 +24,17 @@ export default function Footer() {
               SMART P&amp;B
             </p>
             <p className="text-caption text-[var(--text-muted)]">
-              Reehamlog Inc.&nbsp;·&nbsp;
+              Liham Logue Inc.&nbsp;·&nbsp;
               <a
-                href="mailto:contact@reehamlog.com"
+                href="mailto:contact@lihamlogue.com"
                 className="hover:text-[var(--accent-blue)] transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent-blue)] rounded-sm"
               >
-                contact@reehamlog.com
+                contact@lihamlogue.com
               </a>
               &nbsp;·&nbsp;Seoul, KR
             </p>
             <p className="text-caption text-[var(--text-muted)] mt-1">
-              © 2026 Reehamlog Inc. All rights reserved.
+              © 2026 Liham Logue Inc. All rights reserved.
             </p>
           </div>
 
