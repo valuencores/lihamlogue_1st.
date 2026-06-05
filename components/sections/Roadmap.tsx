@@ -170,8 +170,8 @@ export default function Roadmap() {
           {/* Punchline */}
           <motion.div variants={staggerItem} className="mt-16 sm:mt-20">
             <blockquote
-              className="font-bold text-[var(--text-primary)] max-w-2xl"
-              style={{ fontSize: 'clamp(20px, 2.4vw, 32px)', lineHeight: 1.35, letterSpacing: '-0.015em' }}
+              className="font-bold text-[var(--text-primary)]"
+              style={{ fontSize: 'clamp(15px, 1.8vw, 28px)', lineHeight: 1.35, letterSpacing: '-0.015em' }}
               lang="ko"
             >
               &ldquo;&lsquo;언젠가 큰 회사&rsquo;가 아니라,{' '}

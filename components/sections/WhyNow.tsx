@@ -108,8 +108,8 @@ export default function WhyNow() {
           {/* Punchline */}
           <motion.div variants={staggerItem}>
             <blockquote
-              className="font-bold text-[var(--text-primary)] max-w-2xl"
-              style={{ fontSize: 'clamp(20px, 2.4vw, 32px)', lineHeight: 1.35, letterSpacing: '-0.015em' }}
+              className="font-bold text-[var(--text-primary)]"
+              style={{ fontSize: 'clamp(15px, 1.8vw, 28px)', lineHeight: 1.35, letterSpacing: '-0.015em' }}
               lang="ko"
             >
               &ldquo;기술과 시장과 창작자의 니즈가 동시에 만나는,{' '}

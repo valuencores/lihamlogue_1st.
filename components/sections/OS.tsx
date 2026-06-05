@@ -132,13 +132,12 @@ export default function OS() {
               aria-hidden="true"
             />
             <p
-              className="relative font-bold text-[var(--text-primary)] max-w-2xl"
-              style={{ fontSize: 'clamp(20px, 2.4vw, 32px)', lineHeight: 1.35, letterSpacing: '-0.015em' }}
+              className="relative font-bold text-[var(--text-primary)] whitespace-nowrap"
+              style={{ fontSize: 'clamp(16px, 2.2vw, 30px)', lineHeight: 1.35, letterSpacing: '-0.015em' }}
               lang="ko"
             >
               &ldquo;AI는 속도를, 인간은 신뢰를,{' '}
-              <span className="text-gradient">데이터는 다음 시장을</span>{' '}
-              연다.&rdquo;
+              <span className="text-gradient">데이터는 다음 시장을</span>{' '}연다.&rdquo;
             </p>
           </motion.div>
         </motion.div>
