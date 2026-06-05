@@ -38,25 +38,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Right: nav links */}
-          <nav aria-label="Footer navigation">
-            <ul className="flex items-center gap-5 flex-wrap" role="list">
-              {[
-                { label: 'Privacy', href: '/privacy' },
-                { label: 'Terms',   href: '/terms'   },
-                { label: 'Press',   href: '/press'   },
-              ].map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-caption text-[var(--text-muted)] hover:text-[var(--text-secondary)] transition-colors duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent-blue)] rounded-sm"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+
         </motion.div>
       </div>
     </footer>
