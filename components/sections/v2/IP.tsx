@@ -9,10 +9,9 @@ const CARDS = [
     accentBg: 'rgba(79,140,255,0.12)',
     border: 'rgba(79,140,255,0.18)',
     label: '출판 · ISBN · 유통',
-    title: '쓰는 순간부터\n당신의 것입니다.',
+    title: '사용하는 순간\n리함로그가 시작됩니다.',
     body: '리함로그가 ISBN을 발급하고 리디북스, 교보문고, 밀리의서재에 유통합니다. 한 편의 이야기가 다섯 번의 매출 기회로 자랍니다.',
     tags: [],
-    bottom: '',
   },
   {
     icon: '◈',
@@ -20,10 +19,9 @@ const CARDS = [
     accentBg: 'rgba(123,108,246,0.12)',
     border: 'rgba(123,108,246,0.18)',
     label: '미디어 확장',
-    title: '당신의 이야기가\n또 다른 세계로.',
-    body: '텍스트에서 시작한 이야기가 산업을 넘나듭니다.',
+    title: '하나의 텍스트가\n산업을 넘나듭니다.',
+    body: '드라마, 웹툰, 오디오북, 게임 — 텍스트에서 시작한 이야기가 여러 산업으로 확장됩니다.',
     tags: ['드라마', '웹툰', '오디오북', '게임', '그 너머'],
-    bottom: '',
   },
   {
     icon: '⬡',
@@ -31,10 +29,9 @@ const CARDS = [
     accentBg: 'rgba(139,92,246,0.12)',
     border: 'rgba(139,92,246,0.18)',
     label: '저작권 · IP 보호',
-    title: '쓰는 순간부터\n기록됩니다.',
+    title: '당신의 IP는\n사라지지 않습니다.',
     body: '창작 시점이 보존되고, 당신의 IP가 보호됩니다. 판권 협상의 자산이 됩니다.',
     tags: [],
-    bottom: '',
   },
 ]
 
@@ -73,12 +70,12 @@ export default function IP() {
 
           {/* 헤드라인 */}
           <motion.h2 variants={item} className="font-black text-[var(--text-primary)] mb-16 sm:mb-20"
-            style={{ fontSize: 'clamp(26px, 4vw, 56px)', lineHeight: 1.15, letterSpacing: '-0.025em' }} lang="ko">
-            당신의 이야기는<br />
+            style={{ fontSize: 'clamp(28px, 4.5vw, 64px)', lineHeight: 1.12, letterSpacing: '-0.03em' }} lang="ko">
+            이야기는{' '}
             <span style={{
               background: 'linear-gradient(135deg, #4F8CFF 0%, #8B5CF6 100%)',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-            }}>사라지지 않습니다.</span>
+            }}>자산입니다.</span>
           </motion.h2>
 
           {/* 카드 3개 */}
@@ -100,23 +97,25 @@ export default function IP() {
                     style={{ background: card.accentBg, color: card.accent }}>
                     {card.icon}
                   </div>
-                  <span className="font-bold" style={{ fontSize: '11px', letterSpacing: '0.1em', color: card.accent }}>
+                  <span className="font-bold"
+                    style={{ fontSize: '11px', letterSpacing: '0.1em', color: card.accent }}>
                     {card.label}
                   </span>
                 </div>
 
                 {/* 제목 */}
                 <h3 className="font-bold text-white mb-6"
-                  style={{ fontSize: 'clamp(20px, 1.9vw, 26px)', lineHeight: 1.3, fontWeight: 700, whiteSpace: 'pre-line' }} lang="ko">
+                  style={{ fontSize: 'clamp(20px, 1.9vw, 26px)', lineHeight: 1.3, fontWeight: 700, whiteSpace: 'pre-line' }}
+                  lang="ko">
                   {card.title}
                 </h3>
 
                 {/* 본문 */}
-                <p style={{ fontSize: 'clamp(13px, 1.15vw, 15px)', lineHeight: 1.8, color: '#B8BFD0' }} lang="ko">
+                <p style={{ fontSize: 'clamp(14px, 1.15vw, 15px)', lineHeight: 1.8, color: '#B8BFD0' }} lang="ko">
                   {card.body}
                 </p>
 
-                {/* 태그 (미디어 확장 카드) */}
+                {/* 태그 */}
                 {card.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2 mt-5">
                     {card.tags.map((tag) => (
@@ -134,7 +133,8 @@ export default function IP() {
           {/* 인용구 */}
           <motion.div variants={item} className="text-center">
             <blockquote className="font-bold inline-block"
-              style={{ fontSize: 'clamp(15px, 1.6vw, 22px)', letterSpacing: '-0.01em', color: 'var(--text-secondary)' }} lang="ko">
+              style={{ fontSize: 'clamp(15px, 1.6vw, 22px)', letterSpacing: '-0.01em', color: 'var(--text-secondary)' }}
+              lang="ko">
               &ldquo;그것이 IP입니다. 그것이 당신의 자산입니다.&rdquo;
             </blockquote>
           </motion.div>

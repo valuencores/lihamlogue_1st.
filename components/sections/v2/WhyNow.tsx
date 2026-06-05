@@ -32,6 +32,13 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 }
 
+const G: React.CSSProperties = {
+  background: 'linear-gradient(135deg, #4F8CFF 0%, #8B5CF6 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text',
+}
+
 export default function WhyNow() {
   return (
     <section id="whynow" className="relative py-28 sm:py-36" style={{ background: 'var(--bg-soft)' }}>
@@ -59,14 +66,15 @@ export default function WhyNow() {
 
           {/* 헤드라인 */}
           <motion.h2 variants={item} className="font-black text-[var(--text-primary)] mb-5"
-            style={{ fontSize: 'clamp(26px, 4vw, 56px)', lineHeight: 1.15, letterSpacing: '-0.025em' }} lang="ko">
-            기술과 시장과 창작자의 니즈가<br />동시에 만나는, 단 한 번의 타이밍.
+            style={{ fontSize: 'clamp(28px, 4.5vw, 64px)', lineHeight: 1.12, letterSpacing: '-0.03em' }} lang="ko">
+            <span style={G}>지금이 바로 그 타이밍입니다.</span>
           </motion.h2>
 
           {/* 서브 */}
           <motion.p variants={item} className="text-[var(--text-secondary)] mb-16 sm:mb-20"
             style={{ fontSize: 'clamp(14px, 1.4vw, 17px)', lineHeight: 1.75, maxWidth: '500px' }} lang="ko">
-            출판이 IP 산업으로 재편되는 지금,<br />리함로그가 그 교차점에 있습니다.
+            기술과 시장과 창작자의 니즈가 동시에 만나고 있습니다.<br />
+            출판이 IP 산업으로 재편되는 지금, 리함로그가 그 교차점에 있습니다.
           </motion.p>
 
           {/* 카드 3개 */}
@@ -83,16 +91,16 @@ export default function WhyNow() {
                 }}
                 whileHover={{ y: -4, borderColor: `${card.color}35`, transition: { duration: 0.2 } }}
               >
-                <span className="font-mono-label font-bold mb-4"
+                <span className="font-mono-label font-bold mb-4 block"
                   style={{ fontSize: '11px', color: card.color, letterSpacing: '0.1em' }}>
                   {card.num}
                 </span>
                 <div className="w-8 h-0.5 rounded-full mb-5" style={{ background: card.color }} aria-hidden="true" />
                 <h3 className="font-bold text-white mb-6"
-                  style={{ fontSize: 'clamp(20px, 1.9vw, 26px)', lineHeight: 1.3, fontWeight: 700 }} lang="ko">
+                  style={{ fontSize: 'clamp(20px, 1.9vw, 26px)', lineHeight: 1.3 }} lang="ko">
                   {card.title}
                 </h3>
-                <p style={{ fontSize: 'clamp(13px, 1.15vw, 15px)', lineHeight: 1.8, color: '#B8BFD0' }} lang="ko">
+                <p style={{ fontSize: 'clamp(14px, 1.15vw, 15px)', lineHeight: 1.8, color: '#B8BFD0' }} lang="ko">
                   {card.body}
                 </p>
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
@@ -101,12 +109,20 @@ export default function WhyNow() {
             ))}
           </div>
 
-          {/* 인용구 */}
-          <motion.div variants={item} className="text-center">
-            <blockquote className="font-bold inline-block"
-              style={{ fontSize: 'clamp(14px, 1.5vw, 20px)', letterSpacing: '-0.01em', color: 'var(--text-secondary)' }} lang="ko">
-              &ldquo;기술과 시장과 창작자의 니즈가 동시에 만나는, 단 한 번의 타이밍.&rdquo;
-            </blockquote>
+          {/* 시장 데이터 */}
+          <motion.div variants={item} className="flex flex-wrap gap-x-8 gap-y-3">
+            {[
+              { num: '1.2조', label: '국내 전자유통 시장' },
+              { num: '8,000억', label: '웹소설 연간 시장' },
+              { num: '+15%', label: 'IP 파생 시장 연성장률' },
+            ].map((stat) => (
+              <div key={stat.num} className="flex items-baseline gap-2">
+                <span className="font-black" style={{ fontSize: 'clamp(22px,2.5vw,32px)', letterSpacing: '-0.02em', ...G }}>
+                  {stat.num}
+                </span>
+                <span style={{ fontSize: '13px', color: 'var(--text-muted)' }} lang="ko">{stat.label}</span>
+              </div>
+            ))}
           </motion.div>
 
         </motion.div>

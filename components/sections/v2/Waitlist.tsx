@@ -18,6 +18,13 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 }
 
+const G: React.CSSProperties = {
+  background: 'linear-gradient(135deg, #4F8CFF 0%, #8B5CF6 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text',
+}
+
 export default function Waitlist() {
   const [submitted, setSubmitted] = useState(false)
   const [email, setEmail]   = useState('')
@@ -64,17 +71,19 @@ export default function Waitlist() {
           </motion.p>
 
           {/* 헤드라인 */}
-          <motion.h2 variants={item} className="font-black text-[var(--text-primary)] text-center mb-6"
-            style={{ fontSize: 'clamp(28px, 4.5vw, 60px)', lineHeight: 1.12, letterSpacing: '-0.025em' }} lang="ko">
-            당신의 이야기를 기다립니다.
+          <motion.h2 variants={item} className="font-black text-center mb-6"
+            style={{ fontSize: 'clamp(28px, 4.5vw, 64px)', lineHeight: 1.12, letterSpacing: '-0.03em' }} lang="ko">
+            <span style={{ color: 'var(--text-primary)' }}>당신의 이야기를 </span>
+            <span style={G}>기다립니다.</span>
           </motion.h2>
 
           {/* 본문 */}
           <motion.p variants={item} className="text-[var(--text-secondary)] text-center mx-auto mb-12 sm:mb-14"
-            style={{ fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.85, maxWidth: '480px' }} lang="ko">
-            리함로그는 아직 만들어지고 있습니다.<br />
-            하지만 당신의 이야기는 지금 시작될 수 있습니다.<br />
-            <span className="text-[var(--text-primary)] font-medium">가장 먼저 경험할 창작자를 기다립니다.</span>
+            style={{ fontSize: 'clamp(15px, 1.5vw, 18px)', lineHeight: 1.85, maxWidth: '520px' }} lang="ko">
+            리함로그는 지금 이 순간에도 만들어지고 있습니다.<br />
+            텍스트가 산업이 되는 시대,<br />
+            그 중심에 당신이 있어야 합니다.<br />
+            <span className="font-medium" style={{ color: 'var(--text-primary)' }}>가장 먼저 그 세계를 경험하세요.</span>
           </motion.p>
 
           {/* 폼 */}
@@ -93,9 +102,13 @@ export default function Waitlist() {
             ) : (
               <form onSubmit={handleSubmit} className="rounded-2xl p-6 sm:p-8 flex flex-col gap-4"
                 style={{ background: 'var(--bg-elevated)', border: '1px solid rgba(255,255,255,0.07)' }}>
+                <p className="text-center" style={{ fontSize: '12px', color: 'var(--text-muted)' }} lang="ko">
+                  얼리 액세스 · 스팸 없음 · 언제든 취소 가능
+                </p>
                 <input type="text" placeholder="이름" value={name} onChange={(e) => setName(e.target.value)} required
                   className="w-full h-11 px-4 rounded-xl text-[var(--text-primary)] placeholder-[var(--text-muted)] outline-none"
-                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', fontSize: '14px' }} lang="ko" />
+                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', fontSize: '14px' }}
+                  lang="ko" />
                 <input type="email" placeholder="이메일" value={email} onChange={(e) => setEmail(e.target.value)} required
                   className="w-full h-11 px-4 rounded-xl text-[var(--text-primary)] placeholder-[var(--text-muted)] outline-none"
                   style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', fontSize: '14px' }} />

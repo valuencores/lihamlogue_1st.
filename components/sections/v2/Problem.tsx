@@ -32,6 +32,13 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 }
 
+const G: React.CSSProperties = {
+  background: 'linear-gradient(135deg, #4F8CFF 0%, #8B5CF6 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text',
+}
+
 export default function Problem() {
   return (
     <section id="problem" className="relative py-28 sm:py-36" style={{ background: 'var(--bg-base)' }}>
@@ -43,16 +50,24 @@ export default function Problem() {
         <motion.div variants={container} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
 
           {/* 레이블 */}
-          <motion.p variants={item} className="font-mono-label text-[var(--accent-blue)] mb-5 uppercase" style={{ fontSize: '11px', letterSpacing: '0.15em' }}>
+          <motion.p variants={item} className="font-mono-label text-[var(--accent-blue)] mb-5 uppercase"
+            style={{ fontSize: '11px', letterSpacing: '0.15em' }}>
             03 — THE PROBLEM
           </motion.p>
 
           {/* 헤드라인 */}
-          <motion.h2 variants={item} className="font-black text-[var(--text-primary)] mb-16 sm:mb-20"
-            style={{ fontSize: 'clamp(26px, 4vw, 56px)', lineHeight: 1.15, letterSpacing: '-0.025em' }} lang="ko">
-            출판은 이미 IP 산업으로 바뀌었습니다.<br />
-            그러나 작가는 여전히 혼자입니다.
+          <motion.h2 variants={item} className="font-black text-[var(--text-primary)] mb-5"
+            style={{ fontSize: 'clamp(28px, 4.5vw, 64px)', lineHeight: 1.12, letterSpacing: '-0.03em' }} lang="ko">
+            작가는 여전히<br />
+            <span style={G}>혼자입니다.</span>
           </motion.h2>
+
+          {/* 서브 */}
+          <motion.p variants={item} className="text-[var(--text-secondary)] mb-16 sm:mb-20"
+            style={{ fontSize: 'clamp(14px, 1.4vw, 17px)', lineHeight: 1.75, maxWidth: '480px' }} lang="ko">
+            출판은 이미 IP 산업으로 재편됐습니다.<br />
+            그 안에서 창작자를 위한 시스템은 여전히 없습니다.
+          </motion.p>
 
           {/* 카드 3개 */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-16 sm:mb-20">
@@ -68,16 +83,17 @@ export default function Problem() {
                 }}
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
               >
-                <span className="font-mono-label font-bold" style={{ fontSize: '11px', color: card.color, letterSpacing: '0.1em' }}>
+                <span className="font-mono-label font-bold mb-4 block"
+                  style={{ fontSize: '11px', color: card.color, letterSpacing: '0.1em' }}>
                   {card.num}
                 </span>
-                <div className="w-8 h-0.5 rounded-full" style={{ background: card.color }} aria-hidden="true" />
+                <div className="w-8 h-0.5 rounded-full mb-5" style={{ background: card.color }} aria-hidden="true" />
                 <h3 className="font-bold text-white"
                   style={{ fontSize: 'clamp(20px,1.9vw,26px)', lineHeight: 1.3 }} lang="ko">
                   {card.title}
                 </h3>
-                <p className="mt-6 leading-relaxed"
-                  style={{ fontSize: 'clamp(13px, 1.1vw, 15px)', lineHeight: 1.75, color: '#B8BFD0' }} lang="ko">
+                <p className="mt-6"
+                  style={{ fontSize: 'clamp(14px,1.1vw,15px)', lineHeight: 1.75, color: '#B8BFD0' }} lang="ko">
                   {card.body}
                 </p>
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
@@ -88,11 +104,8 @@ export default function Problem() {
 
           {/* 인용구 */}
           <motion.div variants={item} className="text-center">
-            <blockquote
-              className="font-bold text-[var(--text-secondary)] inline-block"
-              style={{ fontSize: 'clamp(16px, 1.8vw, 24px)', letterSpacing: '-0.01em' }}
-              lang="ko"
-            >
+            <blockquote className="font-bold text-[var(--text-secondary)] inline-block"
+              style={{ fontSize: 'clamp(16px, 1.8vw, 24px)', letterSpacing: '-0.01em' }} lang="ko">
               &ldquo;텍스트는 산업이 됐는데, 작가는 여전히 혼자다.&rdquo;
             </blockquote>
           </motion.div>

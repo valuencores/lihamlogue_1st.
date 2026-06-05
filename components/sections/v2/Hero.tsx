@@ -5,6 +5,13 @@ import { motion } from 'framer-motion'
 
 const ease: [number, number, number, number] = [0.22, 1, 0.36, 1]
 
+const G: React.CSSProperties = {
+  background: 'linear-gradient(135deg, #4F8CFF 0%, #8B5CF6 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text',
+}
+
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -77,36 +84,31 @@ export default function Hero() {
 
       <div className="relative z-10 container-grid text-center px-6">
 
-        {/* 슬로건 */}
+        {/* 브랜드 태그라인 */}
         <motion.p
-          className="font-mono-label text-[var(--accent-blue)] mb-8 uppercase"
-          style={{ fontSize: 'clamp(9px, 1vw, 11px)', letterSpacing: '0.2em' }}
+          className="font-mono-label text-[var(--text-muted)] mb-8 uppercase tracking-widest"
+          style={{ fontSize: 'clamp(9px, 0.9vw, 11px)' }}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1, ease }}
         >
-          INSPIRATION INSCRIBED THROUGH LANGUE
+          ILHAM&nbsp;·&nbsp;LANGUE&nbsp;·&nbsp;LOGUE&nbsp;&nbsp;/&nbsp;&nbsp;영감&nbsp;·&nbsp;구조&nbsp;·&nbsp;기록
         </motion.p>
 
         {/* H1 */}
         <motion.h1
-          className="font-black text-[var(--text-primary)] mb-7"
+          className="font-black mb-7"
           style={{ fontSize: 'clamp(38px, 6.5vw, 92px)', lineHeight: 1.08, letterSpacing: '-0.03em' }}
           lang="ko"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.22, ease }}
         >
-          당신 안에 이미<br />
-          <span style={{
-            background: 'linear-gradient(135deg, #4F8CFF 0%, #8B5CF6 100%)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-          }}>
-            이야기가 있습니다.
-          </span>
+          <span style={{ color: 'var(--text-primary)' }}>당신 안에 이미<br /></span>
+          <span style={G}>이야기가 있습니다.</span>
         </motion.h1>
 
-        {/* 본문 */}
+        {/* 본문 1 */}
         <motion.p
           className="text-[var(--text-secondary)] mb-3 mx-auto"
           style={{ fontSize: 'clamp(15px, 1.7vw, 20px)', lineHeight: 1.75, maxWidth: '480px' }}
@@ -117,6 +119,8 @@ export default function Hero() {
         >
           당신이 알고 있는 것, 세상도 알아야 합니다.
         </motion.p>
+
+        {/* 본문 2 — IP 강조 */}
         <motion.p
           className="text-[var(--text-secondary)] mb-10 mx-auto"
           style={{ fontSize: 'clamp(15px, 1.7vw, 20px)', lineHeight: 1.75, maxWidth: '480px' }}
@@ -126,34 +130,19 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.52, ease }}
         >
           당신의 이야기는 가치 창출의{' '}
-          <span style={{
-            background: 'linear-gradient(135deg, #4F8CFF, #8B5CF6)',
-            WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-            fontWeight: 600,
-          }}>IP가 됩니다.</span>
-        </motion.p>
-
-        {/* 서브태그 */}
-        <motion.p
-          className="font-mono-label text-[var(--text-muted)] mb-10 tracking-widest"
-          style={{ fontSize: 'clamp(9px, 0.9vw, 11px)' }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.65, ease }}
-        >
-          ILHAM&nbsp;·&nbsp;LANGUE&nbsp;·&nbsp;LOGUE&nbsp;&nbsp;/&nbsp;&nbsp;영감&nbsp;·&nbsp;구조&nbsp;·&nbsp;기록
+          <span style={{ ...G, fontWeight: 600 }}>IP가 됩니다.</span>
         </motion.p>
 
         {/* 버튼 */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex items-center justify-center"
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.78, ease }}
+          transition={{ duration: 0.6, delay: 0.65, ease }}
         >
           <button
             onClick={() => document.querySelector('#waitlist')?.scrollIntoView({ behavior: 'smooth' })}
-            className="h-13 px-9 rounded-full text-white font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
+            className="px-9 rounded-full text-white font-semibold transition-all duration-200 hover:opacity-90 active:scale-95"
             style={{
               fontSize: '15px', height: '52px',
               background: 'linear-gradient(135deg, #4F8CFF, #8B5CF6)',
@@ -161,17 +150,6 @@ export default function Hero() {
             }}
           >
             지금 시작하기
-          </button>
-          <button
-            onClick={() => document.querySelector('#problem')?.scrollIntoView({ behavior: 'smooth' })}
-            className="h-13 px-9 rounded-full font-semibold transition-all duration-200 hover:bg-white/5"
-            style={{
-              fontSize: '15px', height: '52px',
-              color: 'var(--text-secondary)',
-              border: '1px solid rgba(255,255,255,0.18)',
-            }}
-          >
-            어떻게 작동하나요 ↓
           </button>
         </motion.div>
       </div>

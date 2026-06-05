@@ -7,7 +7,7 @@ const STEPS = [
     num: '01',
     title: '배경',
     question: '어떤 세계를 만들고 싶으세요?',
-    body: '소설, 시나리오, 에세이, 시 — 장르와 형식에 상관없이 당신이 설정하면 그 세계에 필요한 역사, 언어, 배경이 펼쳐집니다. 유사한 작품도 함께 제시됩니다.',
+    body: '소설, 시나리오, 에세이, 시 — 장르와 형식에 상관없이 당신이 설정하면 그 세계에 필요한 역사, 언어, 배경이 펼쳐집니다.',
     color: '#4F8CFF',
   },
   {
@@ -28,7 +28,7 @@ const STEPS = [
     num: '04',
     title: '씬',
     question: '이제 쓰세요.',
-    body: '형식은 이미 갖춰져 있습니다. 막히는 순간 필요한 정보가 나타납니다. 당신의 이야기가 한 씬씩 완성됩니다.',
+    body: '형식은 이미 갖춰져 있습니다. 막히는 순간 필요한 정보가 나타납니다. 원고가 한 씬씩 완성됩니다.',
     color: '#8B5CF6',
   },
 ]
@@ -42,6 +42,13 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 }
 
+const G: React.CSSProperties = {
+  background: 'linear-gradient(135deg, #4F8CFF 0%, #8B5CF6 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text',
+}
+
 export default function Platform() {
   return (
     <section id="platform" className="relative py-28 sm:py-36" style={{ background: 'var(--bg-base)' }}>
@@ -53,14 +60,15 @@ export default function Platform() {
         <motion.div variants={container} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.15 }}>
 
           {/* 레이블 */}
-          <motion.p variants={item} className="font-mono-label text-[var(--accent-blue)] mb-5 uppercase" style={{ fontSize: '11px', letterSpacing: '0.15em' }}>
+          <motion.p variants={item} className="font-mono-label text-[var(--accent-blue)] mb-5 uppercase"
+            style={{ fontSize: '11px', letterSpacing: '0.15em' }}>
             05 — PLATFORM
           </motion.p>
 
-          {/* 헤드라인 — 동일 크기 두 줄 */}
+          {/* 헤드라인 */}
           <motion.h2 variants={item} className="font-black text-[var(--text-primary)] mb-5"
-            style={{ fontSize: 'clamp(26px, 4vw, 56px)', lineHeight: 1.15, letterSpacing: '-0.025em' }} lang="ko">
-            당신이 이끕니다.<br />필요한 것이 따라옵니다.
+            style={{ fontSize: 'clamp(28px, 4.5vw, 64px)', lineHeight: 1.12, letterSpacing: '-0.03em' }} lang="ko">
+            <span style={G}>당신이 이끕니다.</span><br />필요한 것이 따라옵니다.
           </motion.h2>
 
           {/* 서브 */}
@@ -69,7 +77,7 @@ export default function Platform() {
             아이디어에서 IP까지, 한 플랫폼에서 끝납니다.<br />빈 페이지의 공포는 없습니다.
           </motion.p>
 
-          {/* 카드 4개 — 동일 높이 고정 */}
+          {/* 카드 4개 */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {STEPS.map((step) => (
               <motion.article
@@ -86,10 +94,12 @@ export default function Platform() {
               >
                 {/* 번호 + 타이틀 */}
                 <div className="flex items-center justify-between mb-4">
-                  <span className="font-mono-label font-bold" style={{ fontSize: '11px', color: step.color, letterSpacing: '0.1em' }}>
+                  <span className="font-mono-label font-bold"
+                    style={{ fontSize: '11px', color: step.color, letterSpacing: '0.1em' }}>
                     {step.num}
                   </span>
-                  <span className="font-bold text-[var(--text-muted)]" style={{ fontSize: '11px', letterSpacing: '0.05em' }}>
+                  <span className="font-bold text-[var(--text-muted)]"
+                    style={{ fontSize: '11px', letterSpacing: '0.05em' }}>
                     {step.title}
                   </span>
                 </div>
@@ -99,13 +109,13 @@ export default function Platform() {
 
                 {/* 질문 */}
                 <h3 className="font-bold text-white"
-                  style={{ fontSize: 'clamp(20px,1.9vw,26px)', lineHeight: 1.3 }} lang="ko">
+                  style={{ fontSize: 'clamp(17px,1.6vw,22px)', lineHeight: 1.35 }} lang="ko">
                   {step.question}
                 </h3>
 
-                {/* 본문 — 하단 고정 */}
+                {/* 본문 */}
                 <p className="mt-6 mt-auto"
-                  style={{ fontSize: 'clamp(12px, 1vw, 14px)', lineHeight: 1.75, color: '#B8BFD0' }} lang="ko">
+                  style={{ fontSize: 'clamp(14px,1vw,15px)', lineHeight: 1.75, color: '#B8BFD0' }} lang="ko">
                   {step.body}
                 </p>
 

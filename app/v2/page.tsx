@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 
 const Nav      = dynamic(() => import('@/components/sections/v2/Nav'),      { ssr: false })
 const Hero     = dynamic(() => import('@/components/sections/v2/Hero'),     { ssr: false })
-const Text     = dynamic(() => import('@/components/sections/v2/Text'),     { ssr: false })
+const Reality  = dynamic(() => import('@/components/sections/v2/Reality'),  { ssr: false })
 const Problem  = dynamic(() => import('@/components/sections/v2/Problem'),  { ssr: false })
 const WhyNow   = dynamic(() => import('@/components/sections/v2/WhyNow'),   { ssr: false })
 const Platform = dynamic(() => import('@/components/sections/v2/Platform'), { ssr: false })
@@ -17,7 +17,7 @@ export default function V2Page() {
     <main style={{ background: 'var(--bg-base)', minHeight: '100vh' }}>
       <Nav />
       <Hero />
-      <Text />
+      <Reality />
       <Problem />
       <WhyNow />
       <Platform />
