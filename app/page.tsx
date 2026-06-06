@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <>
       <CustomCursor />
-      <main style={{ background: 'var(--bg-base)', minHeight: '100vh' }}>
+      <main style={{ background: 'var(--bg-base)', minHeight: '100vh', overflowX: 'hidden', maxWidth: '100vw' }}>
         <Nav />
         <Hero />
         <Reality />
